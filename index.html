@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Socio - Home</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+<body>
+	<h3 class="headline">Socio</h3>
+	<div class="main">	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form>
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input id="username" type="text" name="txt" placeholder="User name" required="" autocomplete="off">
+					<input id="email" type="email" name="email" placeholder="Email" required="">
+					<input id="pass" type="password" name="pswd" placeholder="Password" required="">
+					<button onclick="store()">Sign up</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form>
+					<label for="chk" aria-hidden="true">Login</label>
+					<input id="Lusername" type="text" name="username" placeholder="User name" required="" autocomplete="off">
+					<input id="Lpass" type="password" name="pswd" placeholder="Password" required="">
+					<button onclick="login()">Login</button>
+				</form>
+			</div>
+	</div>
+</body>
+<script src="main.js"></script>
+</html>

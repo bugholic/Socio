@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socio - Being Social</title>
+    <style>
+        body{
+            padding: 0 20%;
+        }
+    .mainUi{
+        background-color: #302b63;
+        color: white;
+    }
+    nav{
+        display: flex;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        justify-content: space-between;
+    }
+    .headline{
+        width: 2%;
+        border-bottom:2px solid white ;
+    }
+    main{
+        border: 2px solid rgb(240, 227, 227);
+    }
+    #usernameSection{
+        font-family: monospace;
+        font-weight: 600;
+        margin: 0;
+        padding: 0.4rem;
+        border: 2px solid rgb(223, 217, 217);
+        
+    }
+    #textPost{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        padding: 1rem;
+        background-color: rgb(117, 104, 235);
+     }
+     .flex{
+        display: flex;
+        align-items: center;
+     }
+     .btn abbr{
+         text-decoration: none;
+     }
+     .btn{
+        background-color: #302b63;
+        font-weight: bolder;
+        color: white;
+        right: 2%; 
+    }
+    .btn:hover{
+        border: 2px solid gray;
+    }
+    
+
+
+/* post */
+
+.box{
+    border-bottom: 2px solid white;
+}
+.publisher{
+    text-transform: uppercase;
+    font-size: 10px;
+}
+.quote{
+       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        padding: 1rem;
+        background-color: rgb(117, 104, 235);
+    }
+button{
+    padding: 1%;
+    background-color: #37c8c8;
+    font-weight: bold;
+    border: none;
+    color: white;
+}
+
+
+.inputBox{
+    display: none;
+}
+.input{
+    padding: 0 2%;
+    width: 80%;
+    height: 50px;
+}
+.postBtn{
+    padding: 1%;
+    height: 50px;
+}
+@media only screen and (max-width:720px){
+    *{
+        margin: 0%;
+        padding: 0%;
+    }
+    header{
+        margin:20px 5px;
+    }
+    h1{
+        font-size: small;
+        min-width: 80vw;
+    }
+    #Create , .inputBox button{
+        width: 40px;
+        font-size: 5px;
+        height: 20px;
+        margin: 2px;
+    }
+    .inputBox input{
+        height: 20px;
+        width: 250px;
+        background-color: #2dc08fce;
+        border: none;
+        margin: 2px;
+    }
+    input::placeholder{
+        color: aqua;
+        font-family: cursive;
+    }
+    .quote{
+        font-size: 20px;
+    }
+}
+    </style>
+</head>
+<body class="mainUi">
+    <nav>
+        <p class="headline">Socio</p>
+        <div class="flex">
+            <p id="muser">
+            </p>
+            ||<button id="post" class="btn" type="submit" onclick="create()"><abbr title="You can post with this button">Post</abbr></button>
+            ||<button id="logout" class="btn" type="submit" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+    <main id="post">
+        <div class="root" id="root">
+
+            <div class="inputBox" id="inputBox">
+                <input id="quoteField" placeholder="Write Your Quote" class="input" type="text" >
+                <button id="addPost" class="postBtn" onclick="post()">Post</button>
+                <hr>
+            </div>
+        <!-- <p id="usernameSection">bugholic</p>
+        <div id="textPost">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sunt ullam praesentium perferendis nisi iste, officiis minus aperiam porro numquam cupiditate fugiat sit at temporibus fuga assumenda alias placeat perspiciatis deleniti. Ut cupiditate est quaerat! Rem explicabo nesciunt accusantium velit dolores sapiente nam esse aspernatur?</div>
+        <div id="hiddenfornow"></div> -->
+    </main>
+</body>
+<script>
+
+// mainUi
+let muserInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+let mUser = document.getElementById('muser')
+let usernameSection = document.getElementById('usernameSection')
+let textPost = document.getElementById('textPost')
+
+mUser.innerHTML = muserInfo.username
+// usernameSection.innerHTML = muserInfo.username
+
+
+//post 
+
+let inputBox = document.getElementById('inputBox');
+function create(){
+    inputBox.style.display = "block";
+}
+
+
+
+let quoteCount = 1;
+
+function post() {
+    inputBox.style.display = "none";
+    let container = document.getElementById('root');
+    let quoteField = document.getElementById('quoteField').value;
+    if(quoteField){
+    let quoteBox = document.createElement('div');
+    container.appendChild(quoteBox)
+    quoteBox.classList.add('box')
+
+
+    let quote = document.createElement('p');
+    quoteBox.appendChild(quote);
+    quote.classList.add('quote');
+    quote.innerText = quoteField;
+    localStorage.setItem('quote' + '-' + quoteCount, quoteField + "/" + muserInfo.username);
+    }
+    else{   
+        alert('Empty Field Found');
+    }
+  
+
+    quoteCount++
+}
+// window.addEventListener('load',() =>{
+
+//     let container = document.getElementById('root');
+//     let quoteField = document.getElementById('quoteField').value;
+//     let publisherName = document.getElementById('publisherName').value;
+    
+
+//     let quoteBox = document.createElement('div');
+//     container.appendChild(quoteBox)
+//     quoteBox.classList.add('box')
+
+
+//     let quote = document.createElement('p');
+//     quoteBox.appendChild(quote);
+//     quote.classList.add('quote');
+//     quote.innerText = quoteField;
+//     localStorage.getItem('quote', quoteField);
+
+//     let publisher = document.createElement('h2');
+//     quoteBox.appendChild(publisher);
+//     publisher.classList.add('publisher');
+//     publisher.innerText =  publisherName;
+//     localStorage.getItem('quote' + '' + quoteCount, publisherName);
+// })
+
+
+function logout() {
+            sessionStorage.removeItem('userInfo')
+            window.location.href = "index.html";
+        }
+
+
+
+</script>
+</html>
